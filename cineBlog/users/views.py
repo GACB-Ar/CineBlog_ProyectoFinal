@@ -30,7 +30,10 @@ def register_user(request):
     if request.method == 'POST':
         form = RegisterUserForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)  # Save the form data but don't commit to the database yet
+            user.user_type = form.cleaned_data['user_type']  # Set the user_type from the form data
+            form.save()  # Now save the complete user object with user_type to the database
+
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
