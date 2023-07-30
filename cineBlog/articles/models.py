@@ -16,7 +16,7 @@ class Article(models.Model):
     article_creation_date = models.DateField(auto_now_add=True)
     title = models.CharField(max_length=100, unique=True)
     description = models.CharField(max_length=300, blank=True, default='')
-    tags = models.CharField(max_length=200)
+    tags =  models.ForeignKey(Category, on_delete= models.CASCADE)
     content = models.TextField()
     last_edit = models.DateField(auto_now=True)
     image = models.ImageField(upload_to ='article_files/')
