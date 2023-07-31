@@ -1,11 +1,70 @@
-{% extends 'layouts/base.html' %}
-{% load static %}
-
-{% block content %}
-    <h2>Crear articulo</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Crear</button>
-    </form>
+{% extends 'layouts/base.html' %} {% load static %} {% block content %}
+<h2>Crear artículo</h2>
+<div class="card p-4 my-4">
+  <form method="POST" enctype="multipart/form-data" class="d-flex flex-column">
+    {% csrf_token %}
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="id_title" class="form-label">Título</label>
+        <input
+          type="text"
+          name="title"
+          maxlength="100"
+          required=""
+          class="form-control"
+          id="id_title"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="id_description" class="form-label">Descripción</label>
+        <input
+          type="text"
+          name="description"
+          maxlength="300"
+          class="form-control"
+          id="id_description"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="id_tags" class="form-label">Tags</label>
+        <select name="tags" required="" id="id_tags" class="form-select">
+          <option value="" selected>Selecciona una categoria</option>
+          <option value="1">Terror</option>
+          <option value="2">Comedia</option>
+          <option value="3">Fantasía</option>
+          <option value="4">Drama</option>
+          <option value="5">Acción</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="id_content" class="form-label">Contenido</label>
+        <textarea
+          name="content"
+          cols="40"
+          rows="10"
+          required=""
+          class="form-control"
+          id="id_content"
+        ></textarea>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="id_image" class="form-label">Imagen</label>
+        <input
+          type="file"
+          name="image"
+          accept="image/*"
+          class="form-control"
+          id="id_image"
+        />
+      </div>
+    </div>
+    <button type="submit" class="d-flex justify-content-center px-3 py-3 mt-3">
+      Crear
+    </button>
+  </form>
+</div>
 {% endblock content %}

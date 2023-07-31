@@ -5,7 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('articles/', article_view, name='articles'),
-    path('create_article/', create_article, name='create'),
-    path('article_detail/<int:id>', article_detail,  name='article_detail')
+    path('articulos/', article_view, name='articles'),
+    path('crear-articulo/', create_article, name='create'),
+    path('articulo/<int:id>', article_detail,  name='article_detail')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

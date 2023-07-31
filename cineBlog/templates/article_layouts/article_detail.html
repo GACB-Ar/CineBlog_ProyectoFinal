@@ -1,14 +1,14 @@
-{% extends 'layouts/base.html' %}
-{% load static %}
+{% extends 'layouts/base.html' %} {% load static %} {% block content %}
 
-{% block content %}
-    <h2>Article details</h2>
-    {% csrf_token %}
-    <img src="{{ article.image.url }}" width="50">
-    <p>Titulo: {{ article.title }}</p>
-    <p>Creado por: {{ article.article_ownership }}</p>
-    <p>Ultima actualizacion: {{ article.last_edit }}</p>
-    <p>Fecha: {{article.article_creation_date }}</p>
-    <p>Categoria: {{ article.tags }}</p>
-    <p>Contenido: {{ article.content }}</p>
+<div class="d-flex flex-column gap-4 my-4">
+  <img
+    src="{{article.image.url}}"
+    class="my-3 img-fluid rounded d-block object-fit-cover"
+    alt="{{article.title}}"
+  />
+
+  <h1>{{article.title}}</h1>
+
+  <div>{{article.content | safe}}</div>
+</div>
 {% endblock content %}

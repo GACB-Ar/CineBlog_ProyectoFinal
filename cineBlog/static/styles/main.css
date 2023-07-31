@@ -1,8 +1,117 @@
-body{
-    background-color: #473f3f;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 20px;
+/* Variables de colores */
+:root {
+  --pale-white: #f0f0f0;
+  --black: #000000;
+  --dark-blue: #13a4a4;
+  --light-blue: #6bc9c9;
+  --fuchsia: #ff1493;
+}
+
+/* Estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  list-style-type: none;
+  text-decoration: none;
+}
+
+body {
+  background: var(--pale-white);
+  font-family: Roboto, sans-serif;
+  color: var(--black);
+}
+
+a {
+  font-weight: 500;
+}
+
+/* Estilos para el header */
+header {
+  border-radius: 8px; /* Adding rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+}
+
+header a {
+  text-transform: uppercase;
+}
+
+/* Estilos para los enlaces de navegación */
+.nav-item a:hover {
+  color: var(--dark-blue);
+}
+
+/* Estilos para el enlace activo */
+.active a {
+  color: var(--dark-blue);
+  border-radius: 5px;
+}
+
+/* Estilos para las cartas */
+.card {
+  border-radius: 0 0 40px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para la clase .card */
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card .card-body {
+  flex: 1;
+}
+
+.card .card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.card .card-text {
+  font-size: 1rem;
+}
+
+/* Estilos para la clase .cart */
+.cart {
+  text-decoration: none;
+}
+
+/* Estilos para .cart al hacer hover */
+.cart:hover .card-title {
+  text-decoration: underline;
+}
+
+.cart:hover img {
+  opacity: 0.5;
+}
+
+/* Estilos para el botón del formulario */
+form button {
+  background: var(--dark-blue);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+form button:hover {
+  background: var(--light-blue);
+}
+
+/* Estilos para enlaces y botones en pantallas pequeñas */
+@media (max-width: 993px) {
+  .active a,
+  .nav-link:hover {
+    background: var(--dark-blue);
+    color: #fff;
+    border: none;
   }
+}
