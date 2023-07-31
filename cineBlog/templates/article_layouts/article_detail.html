@@ -1,0 +1,14 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h2>Article details</h2>
+    {% csrf_token %}
+    <img src="{{ article.image.url }}" width="50">
+    <p>Titulo: {{ article.title }}</p>
+    <p>Creado por: {{ article.article_ownership }}</p>
+    <p>Ultima actualizacion: {{ article.last_edit }}</p>
+    <p>Fecha: {{article.article_creation_date }}</p>
+    <p>Categoria: {{ article.tags }}</p>
+    <p>Contenido: {{ article.content }}</p>
+{% endblock content %}

@@ -2,5 +2,12 @@
 {% load static %}
 
 {% block content %}
-    <h2>Article</h2>
+    <h2>Articles</h2>
+        {% for entry in articles %}
+            <img src="{{ entry.image.url }}" width="50">
+            <p><a href="{% url 'article_detail' entry.article_id %}">Titulo: {{ entry.title }}</a></p>
+            <p>Fecha: {{ entry.article_creation_date }}</p>
+            <p>Categoria: {{ entry.tags }}</p>
+            <p>Contenido: {{ entry.content }}</p>
+        {% endfor %}
 {% endblock content %}
