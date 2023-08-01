@@ -17,15 +17,16 @@ def article_detail(request, id):
     article = get_object_or_404(Article, article_id=id)
     comment = Comments.objects.all()
     edit_permission = False
+    comment_form = CommentForm()  # Inicializar el formulario fuera del bloque de autenticación
 
     if request.user.is_authenticated:
-        if request.user.user_type in ['Collaborator', 'Superuser', 'Member'] :
+        if request.user.user_type in ['Collaborator', 'Superuser', 'Member']:
             edit_permission = True
             if request.method == 'POST' and 'delete_article' in request.POST:
                 article.delete()
                 messages.success(request, 'El articulo ha sido borrado correctamente')
                 return redirect('articles')
-            
+
             if request.method == 'POST' and 'comment_article' in request.POST:
                 comment_form = CommentForm(request.POST)
                 if comment_form.is_valid():
@@ -34,8 +35,7 @@ def article_detail(request, id):
                     comment.comment_ownership = request.user
                     comment.save()
                     return redirect('article_detail', id=id)
-            else:
-                comment_form = CommentForm()
+            # No es necesario incluir el 'else' aquí, ya que el formulario ya está inicializado
 
     context = {
         'article': article,
@@ -51,7 +51,7 @@ def edit_article(request, id):
     edit_form = get_object_or_404(Article, article_id=id)
     
     if request.method == 'POST':
-        edit_form = Edit_existing_article(request.POST, instance=edit_form)
+        edit_form = Edit_existing_article(request.POST,request.FILES, instance=edit_form )
         if edit_form.is_valid():
             edit_form.save()
             messages.success(request, 'El articulo ha sido editado correctamente')

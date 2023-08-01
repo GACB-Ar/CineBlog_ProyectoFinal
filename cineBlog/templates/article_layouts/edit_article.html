@@ -2,11 +2,17 @@
 <h2>Editar artículo</h2>
 <div class="card p-4 my-4">
   <form method="POST" enctype="multipart/form-data" class="d-flex flex-column">
-    {% csrf_token %}
-    {{ edit_form }}
+    {% csrf_token %} {{ edit_form.as_p }} {% if edit_form.instance.image %}
+    <img
+      src="{{ edit_form.instance.image.url }}"
+      class="my-3 img-fluid rounded d-block object-fit-cover"
+      alt="{{ edit_form.instance.title }}"
+    />
+    {% endif %}
+
     <button type="submit" class="d-flex justify-content-center px-3 py-3 mt-3">
       Editar
     </button>
-  </form>     
+  </form>
 </div>
 {% endblock content %}

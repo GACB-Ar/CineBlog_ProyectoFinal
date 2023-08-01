@@ -12,35 +12,30 @@
   <div>{{article.content | safe}}</div>
 </div>
 {% if edit_permission %}
-  <h1>Eres staff/colaborador</h1>
-  <a href="{% url 'edit_article' article.article_id %}">Editar</a>
+<h1>Eres - colaborador</h1>
+<a href="{% url 'edit_article' article.article_id %}">Editar</a>
 
-  <form method="POST" action="{% url 'article_detail' article.article_id %}">
-    {% csrf_token %}
-    <button type="submit" name="delete_article">Borrar</button>
-  </form>
+<form method="POST" action="{% url 'article_detail' article.article_id %}">
+  {% csrf_token %}
+  <button type="submit" name="delete_article">Borrar</button>
+</form>
 
 {% if user.is_authenticated %}
-  <h3>Añadir Comentario</h3>
-  <form method="POST" action="{% url 'article_detail' article.article_id %}">
-      {% csrf_token %}
-      {{ comment_form.as_p }}
-      <button type="submit">Enviar</button>
-  </form>
+<h3>Añadir Comentario</h3>
+<form method="POST" action="{% url 'article_detail' article.article_id %}">
+  {% csrf_token %} {{ comment_form.as_p }}
+  <button type="submit" name="comment_article">Enviar</button>
+</form>
 {% else %}
-  <p>Debe iniciar sesión para añadir un comentario</p>
-  <a href="{% url 'login' %}">Login</a>
-{% endif %}
+<p>Debe iniciar sesión para añadir un comentario</p>
+<a href="{% url 'login' %}">Login</a>
+{% endif %} {% endif %}
 
 <h3>Comentarios</h3>
-    {% for entry in comment %}
-        <p>{{ entry.comment_ownership }}</p>
-        <p>{{ entry.content }}</p>
-        <p>{{ entry.comment_creation_date }}</p>
-    {% empty %}
-        <p>No hay comentarios.</p>
-    {% endfor %}
-{% else %}
-  <h1>Eres visitante</h1>
-{% endif %}
-{% endblock content %}
+{% for entry in comment %}
+<p>{{ entry.comment_ownership }}</p>
+<p>{{ entry.content }}</p>
+<p>{{ entry.comment_creation_date }}</p>
+{% empty %}
+<p>No hay comentarios.</p>
+{% endfor %} {% endblock content %}
