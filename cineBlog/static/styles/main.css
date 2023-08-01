@@ -1,10 +1,13 @@
 /* Variables de colores */
 :root {
   --pale-white: #f0f0f0;
-  --black: #000000;
-  --dark-blue: #13a4a4;
-  --light-blue: #6bc9c9;
+  --black: #0d0d0d;
+  --dark-blue: #0f5c8c;
+  --light-blue: #4287b7;
+  --light-blue-two: #05f2db;
   --fuchsia: #ff1493;
+  --peach-puff-light: #f2cdac;
+  --turquoise: #13a4a4; /* Nueva variable para el color #13a4a4 */
 }
 
 /* Estilos generales */
@@ -37,15 +40,18 @@ header a {
   text-transform: uppercase;
 }
 
+header .navbar-brand img {
+  width: 4rem;
+}
+
 /* Estilos para los enlaces de navegación */
 .nav-item a:hover {
-  color: var(--dark-blue);
+  color: var(--turquoise); /* Utilizando la variable para el color #13a4a4 */
 }
 
 /* Estilos para el enlace activo */
 .active a {
-  color: var(--dark-blue);
-  border-radius: 5px;
+  color: var(--turquoise); /* Utilizando la variable para el color #13a4a4 */
 }
 
 /* Estilos para las cartas */
@@ -108,9 +114,14 @@ form button:hover {
 
 /* Estilos para enlaces y botones en pantallas pequeñas */
 @media (max-width: 993px) {
+  .nav-link {
+    padding: 5px;
+  }
   .active a,
   .nav-link:hover {
-    background: var(--dark-blue);
+    background: var(
+      --turquoise
+    ); /* Utilizando la variable para el color #13a4a4 */
     color: #fff;
     border: none;
   }

@@ -5,6 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link
+      rel="shortcut icon"
+      href="{% static 'logo/logo.png'%}"
+      type="image/x-icon"
+    />
+
     <!--font family | Roboto-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,8 +31,9 @@
       type="text/css"
       href="{% static 'styles/main.css' %}"
     />
-    <title>Document</title>
+    <title>Blog</title>
   </head>
+
   <body>
     <!--Header-->
     <header class="fixed-top">
@@ -81,8 +88,8 @@
       </nav>
     </header>
 
-    <main class="container py-5 my-3">
-      <div class="py-5">
+    <main class="container py-5 my-5">
+      <div class="py-5 my-4">
         {% if messages %} {% for message in messages %}
 
         <div
