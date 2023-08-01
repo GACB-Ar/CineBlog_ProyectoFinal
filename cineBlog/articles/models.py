@@ -19,7 +19,7 @@ class Article(models.Model):
     tags =  models.ForeignKey(Category, on_delete= models.CASCADE)
     content = models.TextField()
     last_edit = models.DateField(auto_now=True)
-    image = models.ImageField(upload_to ='article_files/')
+    image = models.ImageField(upload_to ='article_files')
 
     def __str__(self):
         return self.title
@@ -28,6 +28,7 @@ class Comments(models.Model):
     comment_id = models.BigAutoField(primary_key=True)
     comment_ownership = models.ForeignKey(User, on_delete=models.CASCADE)
     comment_creation_date = models.DateTimeField(default=timezone.now)
+    related_article = models.ForeignKey(Article, on_delete=models.CASCADE)
     content = models.TextField()
     last_edit = models.DateField(auto_now=True)
 
