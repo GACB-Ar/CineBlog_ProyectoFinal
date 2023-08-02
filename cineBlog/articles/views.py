@@ -36,8 +36,8 @@ def article_detail(request, id):
                     comment.related_article = article
                     comment.comment_ownership = request.user
                     comment.save()
+                    messages.success(request, 'Creaste el comentario correctamente!')
                     return redirect('article_detail', id=id)
-            # No es necesario incluir el 'else' aquí, ya que el formulario ya está inicializado
 
     context = {
         'article': article,
@@ -72,6 +72,7 @@ def edit_article(request, id):
 
     return render(request, 'article_layouts/edit_article.html', context )
 
+
 @login_required
 def create_article(request):
     if request.method == 'POST':
@@ -80,13 +81,13 @@ def create_article(request):
             article = form.save(commit=False)
             article.article_ownership = request.user
             article.save()
+            messages.success(request, '¡El artículo ha sido creado exitosamente!')
             return redirect('articles')
         else:
-            messages.error(request, 'Articulo inválido, intente otra vez')
+            messages.error(request, 'Artículo inválido, por favor intente nuevamente.')
     else:
         form = Create_new_article()
     
-    return render(request, 'article_layouts/create_article.html', {'form':form})
-
+    return render(request, 'article_layouts/create_article.html', {'form': form})
 
 

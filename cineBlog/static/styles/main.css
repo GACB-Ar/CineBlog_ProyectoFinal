@@ -129,16 +129,13 @@ form button:hover {
   background: var(--light-blue);
 }
 
-footer {
-  background: var(--peach-puff-light);
-}
 footer img {
   width: 5rem;
 }
 
 footer a {
   text-decoration: none;
-  color: var(--black);
+  color: #fff;
 }
 
 footer a:hover {

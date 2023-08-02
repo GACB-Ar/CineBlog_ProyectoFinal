@@ -20,10 +20,12 @@
   >
 
   <script>
-    const confirmDelete = () =>
-      confirm(
-        "¿Estás seguro de que deseas eliminar el articulo -> {{article.title}} ?"
+    const confirmDelete = () => {
+      const title = "{{ article.title|escapejs }}"; // Escapar caracteres especiales de JavaScript
+      return confirm(
+        `¿Estás seguro de que deseas eliminar el artículo  ${title} ? `
       );
+    };
   </script>
 
   <form
