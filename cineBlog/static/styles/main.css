@@ -25,6 +25,10 @@ body {
   color: var(--black);
 }
 
+p {
+  font-size: 20px;
+}
+
 a {
   font-weight: 500;
 }
@@ -108,8 +112,38 @@ form button {
   text-transform: uppercase;
 }
 
+.button {
+  background: var(--dark-blue);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.button:hover {
+  background: var(--light-blue);
+}
+
 form button:hover {
   background: var(--light-blue);
+}
+
+footer {
+  background: var(--peach-puff-light);
+}
+footer img {
+  width: 5rem;
+}
+
+footer a {
+  text-decoration: none;
+  color: var(--black);
+}
+
+footer a:hover {
+  text-decoration: underline;
+  color: var(--turquoise);
 }
 
 /* Estilos para enlaces y botones en pantallas pequeñas */
@@ -118,11 +152,11 @@ form button:hover {
     padding: 5px;
   }
   .active a,
-  .nav-link:hover {
-    background: var(
-      --turquoise
-    ); /* Utilizando la variable para el color #13a4a4 */
+  .nav-item a:hover {
+    background: var(--turquoise);
     color: #fff;
-    border: none;
+  }
+
+  header a:hover {
   }
 }

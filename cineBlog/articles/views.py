@@ -7,9 +7,11 @@ from django.contrib import messages
 # Create your views here.
 def article_view(request):
     articles = Article.objects.all()
+    edit_permission = False
 
     context = {
         'articles': articles,
+        'edit_permission': edit_permission,
     }
     return render(request, 'article_layouts/article.html', context)
 
@@ -78,7 +80,7 @@ def create_article(request):
             article = form.save(commit=False)
             article.article_ownership = request.user
             article.save()
-            return redirect('home')
+            return redirect('articles')
         else:
             messages.error(request, 'Articulo inválido, intente otra vez')
     else:

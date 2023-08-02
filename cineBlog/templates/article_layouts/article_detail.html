@@ -19,7 +19,18 @@
     >Editar</a
   >
 
-  <form method="POST" action="{% url 'article_detail' article.article_id %}">
+  <script>
+    const confirmDelete = () =>
+      confirm(
+        "¿Estás seguro de que deseas eliminar el articulo -> {{article.title}} ?"
+      );
+  </script>
+
+  <form
+    method="POST"
+    action="{% url 'article_detail' article.article_id %}"
+    onsubmit="return  confirmDelete();"
+  >
     {% csrf_token %}
     <button type="submit" name="delete_article" class="btn btn-danger">
       Eliminar

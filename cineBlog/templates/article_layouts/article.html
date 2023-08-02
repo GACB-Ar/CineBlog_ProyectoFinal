@@ -15,9 +15,21 @@
   </div>
   {% endfor %} {% else %}
   <div class="col-12">
-    <p>No hay artículos.</p>
+    <p class="">No hay artículos.</p>
+    {% if user.is_authenticated %}
+    <div class="my-4">
+      <a href="{% url 'create' %}" class="button p-3">Crear Articulo</a>
+    </div>
+    {% else %}
+    <div class="my-4 d-flex gap-3 flex-column">
+      <p>Si desea crear un artículo, por favor</p>
+      <div class="">
+        <a href="{% url 'register' %}" class="button p-3">Registrarse</a>
+        <a href="{% url 'login' %}" class="button p-3">Iniciar Sesión</a>
+      </div>
+    </div>
+    {% endif %}
   </div>
   {% endif %}
-  <a href="{% url 'create' %}" class="cart">Crear Articulo</a>
 </div>
 {% endblock content %}
