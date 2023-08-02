@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Article, Comments
+from .models import Article, Comments, Category
 from .forms import Create_new_article, Edit_existing_article, CommentForm
 from django.contrib import messages
 
@@ -49,6 +49,7 @@ def article_detail(request, id):
 @login_required
 def edit_article(request, id):
     edit_form = get_object_or_404(Article, article_id=id)
+    categories = Category.objects.all()
     
     if request.method == 'POST':
         edit_form = Edit_existing_article(request.POST,request.FILES, instance=edit_form )
@@ -61,7 +62,13 @@ def edit_article(request, id):
             return redirect('edit_article', id=id)
     else:
         edit_form = Edit_existing_article(instance=edit_form)
-    return render(request, 'article_layouts/edit_article.html', {'edit_form': edit_form})
+
+    context = {
+        'edit_form': edit_form ,
+        'categories': categories
+    }
+
+    return render(request, 'article_layouts/edit_article.html', context )
 
 @login_required
 def create_article(request):
