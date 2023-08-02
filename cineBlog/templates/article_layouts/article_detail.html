@@ -12,30 +12,65 @@
   <div>{{article.content | safe}}</div>
 </div>
 {% if edit_permission %}
-<h1>Eres - colaborador</h1>
-<a href="{% url 'edit_article' article.article_id %}">Editar</a>
+<hr class="my-3" />
+<h3>Gestiona la publicación</h3>
+<div class="d-flex gap-3 my-4">
+  <a href="{% url 'edit_article' article.article_id %}" class="btn btn-primary"
+    >Editar</a
+  >
 
-<form method="POST" action="{% url 'article_detail' article.article_id %}">
-  {% csrf_token %}
-  <button type="submit" name="delete_article">Borrar</button>
-</form>
+  <form method="POST" action="{% url 'article_detail' article.article_id %}">
+    {% csrf_token %}
+    <button type="submit" name="delete_article" class="btn btn-danger">
+      Eliminar
+    </button>
+  </form>
+</div>
 
 {% if user.is_authenticated %}
 <h3>Añadir Comentario</h3>
-<form method="POST" action="{% url 'article_detail' article.article_id %}">
-  {% csrf_token %} {{ comment_form.as_p }}
-  <button type="submit" name="comment_article">Enviar</button>
+<form
+  method="POST"
+  class="d-flex flex-column gap-2 my-4"
+  action="{% url 'article_detail' article.article_id %}"
+>
+  {% csrf_token %}
+  <div class="row gap-3">
+    <div class="col-12 d-flex flex-column">
+      <label for="id_content" class="form-label">Contentar:</label>
+
+      <textarea
+        name="content"
+        cols="40"
+        rows="10"
+        required=""
+        id="id_content"
+        class="form-control"
+      ></textarea>
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    name="comment_article"
+    class="d-flex justify-content-center px-3 py-3 mt-3"
+  >
+    Comentar
+  </button>
 </form>
 {% else %}
 <p>Debe iniciar sesión para añadir un comentario</p>
 <a href="{% url 'login' %}">Login</a>
-{% endif %} {% endif %}
+{% endif %} {% endif %} {% for entry in comment %}
+<div class="card my-5 gap-4">
+  <h3 class="bg-info p-3">{{ entry.comment_ownership }}</h3>
 
-<h3>Comentarios</h3>
-{% for entry in comment %}
-<p>{{ entry.comment_ownership }}</p>
-<p>{{ entry.content }}</p>
-<p>{{ entry.comment_creation_date }}</p>
+  <div class="card-body">
+    <p class="">{{ entry.content }}</p>
+  </div>
+
+  <p class="p-3 pb-0"><strong> {{ entry.comment_creation_date }} </strong></p>
+</div>
 {% empty %}
 <p>No hay comentarios.</p>
 {% endfor %} {% endblock content %}
