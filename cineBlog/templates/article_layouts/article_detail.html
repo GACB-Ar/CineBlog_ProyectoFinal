@@ -83,6 +83,14 @@
   </div>
 
   <p class="p-3 pb-0"><strong> {{ entry.comment_creation_date }} </strong></p>
+
+  <form method="POST" action="{% url 'edit_comment' comment.comment_id %}">
+    {% csrf_token %}
+    {% if entry.comment_ownership == user.username or user.is_staff or user.is_superuser %}
+        <button type="submit">Borrar comentario</button>
+        <a href="{% url 'edit_comment' entry.comment_id %}">Editar comentario</a>
+    {% endif %}
+  </form>
 </div>
 {% empty %}
 <p>No hay comentarios.</p>

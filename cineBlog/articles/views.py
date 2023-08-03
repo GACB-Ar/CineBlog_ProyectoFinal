@@ -8,9 +8,29 @@ from django.contrib import messages
 def article_view(request):
     articles = Article.objects.all()
     categories = Category.objects.all()
-    
     edit_permission = False
 
+    category_selection = request.GET.get('category_selection')
+    if category_selection:
+        articles = articles.filter(tags=category_selection)
+
+    antiquity_desc = request.GET.get('antiquity_desc')
+    if antiquity_desc:
+        articles = articles.order_by('-article_creation_date')
+
+    antiquity_asc = request.GET.get('antiquity_asc')
+    if antiquity_asc:
+        articles = articles.order_by('article_creation_date')
+
+    alphabet_asc = request.GET.get('alphabet_asc')
+    if alphabet_asc:
+        articles = articles.order_by('title')
+
+    alphabet_desc = request.GET.get('alphabet_desc')
+    if alphabet_desc:
+        articles = articles.order_by('-title')
+        
+    
     context = {
         'articles': articles,
         'edit_permission': edit_permission,
@@ -22,7 +42,7 @@ def article_detail(request, id):
     article = get_object_or_404(Article, article_id=id)
     comment = Comments.objects.all()
     edit_permission = False
-    comment_form = CommentForm()  # Inicializar el formulario fuera del bloque de autenticación
+    comment_form = CommentForm()
 
     if request.user.is_authenticated:
         if request.user.user_type in ['Collaborator', 'Superuser', 'Member']:
@@ -41,12 +61,12 @@ def article_detail(request, id):
                     comment.save()
                     messages.success(request, 'Creaste el comentario correctamente!')
                     return redirect('article_detail', id=id)
-
+            
     context = {
         'article': article,
         'edit_permission': edit_permission,
         'comment_form': comment_form,
-        'comment': comment
+        'comment': comment,
     }
 
     return render(request, 'article_layouts/article_detail.html', context)
@@ -75,9 +95,27 @@ def edit_article(request, id):
 
     return render(request, 'article_layouts/edit_article.html', context )
 
+@login_required
+def edit_comment(request, comment_id):
+    comment = get_object_or_404(Comments, comment_id=comment_id)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect('articulo', id=comment.related_article)
+    else:
+        form = CommentForm(instance=comment)
+
+    context = {
+        'form': form,
+        'comment': comment,
+    }
+    return render(request, 'noticias/edit_comment.html', context)
 
 @login_required
 def create_article(request):
+    categories = Category.objects.all()
     if request.method == 'POST':
         form = Create_new_article(request.POST, request.FILES)
         if form.is_valid():
@@ -91,6 +129,7 @@ def create_article(request):
     else:
         form = Create_new_article()
     
-    return render(request, 'article_layouts/create_article.html', {'form': form})
+    return render(request, 'article_layouts/create_article.html', {'form': form, 
+                                                                   'categories': categories})
 
 

@@ -44,11 +44,9 @@
         <label for="id_tags" class="form-label">Tags</label>
         <select name="tags" required="" id="id_tags" class="form-select">
           <option value="" selected>Selecciona una categoria</option>
-          <option value="1">Terror</option>
-          <option value="2">Comedia</option>
-          <option value="3">Fantasía</option>
-          <option value="4">Drama</option>
-          <option value="5">Acción</option>
+          {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+          {% endfor %}
         </select>
       </div>
       <div class="col-md-6">
