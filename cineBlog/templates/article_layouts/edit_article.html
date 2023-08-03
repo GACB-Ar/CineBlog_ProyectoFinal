@@ -37,6 +37,18 @@
       </div>
 
       <div class="col-md-12">
+        <label for="id_url_video" class="form-label">Url pelicula</label>
+        <input
+          type="text"
+          name="video_url"
+          value="{{ edit_form.instance.video_url }}"
+          maxlength="300"
+          class="form-control"
+          id="id_url_video"
+        />
+      </div>
+
+      <div class="col-md-12">
         <div class="form-group">
           <label for="id_content" class="form-label">Content:</label>
           <textarea name="content" cols="40" rows="10" required=""

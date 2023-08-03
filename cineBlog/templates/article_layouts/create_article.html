@@ -28,6 +28,16 @@
     </div>
     <div class="row mb-3">
       <div class="col-md-12">
+        <label for="id_url_video" class="form-label">Url pelicula</label>
+        <input
+          type="text"
+          name="video_url"
+          maxlength="300"
+          class="form-control"
+          id="id_url_video"
+        />
+      </div>
+      <div class="col-md-12 my-3">
         <label for="id_content" class="form-label">Contenido</label>
         <textarea
           name="content"
@@ -38,8 +48,6 @@
           id="id_content"
         ></textarea>
       </div>
-    </div>
-    <div class="row mb-3">
       <div class="col-md-6">
         <label for="id_tags" class="form-label">Tags</label>
         <select name="tags" required="" id="id_tags" class="form-select">
@@ -63,6 +71,8 @@
     <button type="submit" class="d-flex justify-content-center px-3 py-3 mt-3">
       Crear
     </button>
+    </div>
+   
   </form>
 </div>
 {% endblock content %}

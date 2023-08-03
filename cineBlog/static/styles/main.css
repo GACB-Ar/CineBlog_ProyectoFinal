@@ -143,6 +143,10 @@ footer a:hover {
   color: var(--turquoise);
 }
 
+.d-flex a img:hover {
+  opacity: 0.5;
+}
+
 /* Estilos para enlaces y botones en pantallas pequeñas */
 @media (max-width: 993px) {
   .nav-link {

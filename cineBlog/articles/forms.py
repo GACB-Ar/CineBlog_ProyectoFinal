@@ -6,12 +6,12 @@ class Create_new_article(forms.ModelForm):
 
     class Meta:
         model = Article
-        fields = [ "title", "description", "tags", "content", "image"]
+        fields = [ "title", "description", "tags", "content", "image", "video_url"]
 
 class Edit_existing_article(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ["title", "description", "tags", "content", "image"]
+        fields = ["title", "description", "tags", "content", "image", "video_url"]
 
 class CommentForm(forms.ModelForm):
     class Meta:
