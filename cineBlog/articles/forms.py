@@ -23,3 +23,8 @@ class CommentForm(forms.ModelForm):
         super(CommentForm, self).init(args, **kwargs)
         if user:
             self.instance.comment_ownership = user
+
+class Edit_existing_comment(forms.ModelForm):
+    class Meta:
+        model = Comments
+        fields = ['content']

@@ -29,8 +29,7 @@ def article_view(request):
     alphabet_desc = request.GET.get('alphabet_desc')
     if alphabet_desc:
         articles = articles.order_by('-title')
-        
-    
+
     context = {
         'articles': articles,
         'edit_permission': edit_permission,
@@ -52,6 +51,7 @@ def article_detail(request, id):
                 messages.success(request, 'El articulo ha sido borrado correctamente')
                 return redirect('articles')
 
+
             if request.method == 'POST' and 'comment_article' in request.POST:
                 comment_form = CommentForm(request.POST)
                 if comment_form.is_valid():
@@ -61,7 +61,7 @@ def article_detail(request, id):
                     comment.save()
                     messages.success(request, 'Creaste el comentario correctamente!')
                     return redirect('article_detail', id=id)
-            
+
     context = {
         'article': article,
         'edit_permission': edit_permission,
@@ -129,7 +129,15 @@ def create_article(request):
     else:
         form = Create_new_article()
     
-    return render(request, 'article_layouts/create_article.html', {'form': form, 
-                                                                   'categories': categories})
+    return render(request, 'article_layouts/create_article.html', {'form': form,
+            'categories': categories})
 
 
+@login_required
+def delete_comment(request,article_id, comment_id):
+    comment= get_object_or_404(Comments, comment_id=comment_id)
+
+
+    comment.delete()
+    messages.success(request, 'El comentario ha sido borrado correctamente')
+    return redirect('article_detail', id=article_id)
