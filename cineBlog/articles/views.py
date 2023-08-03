@@ -7,11 +7,14 @@ from django.contrib import messages
 # Create your views here.
 def article_view(request):
     articles = Article.objects.all()
+    categories = Category.objects.all()
+    
     edit_permission = False
 
     context = {
         'articles': articles,
         'edit_permission': edit_permission,
+        'categories': categories
     }
     return render(request, 'article_layouts/article.html', context)
 
