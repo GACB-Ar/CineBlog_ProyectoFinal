@@ -84,19 +84,16 @@
 
   <p class="p-3 pb-0"><strong> {{ entry.comment_creation_date }} </strong></p>
 
-  <div class="d-flex gap-3 p-3">
-    {% if entry.comment_ownership == user.username or user.is_staff or
-    user.is_superuser %}
-    <form method="POST" action="{% url 'edit_comment' comment.comment_id %}">
-      {% csrf_token %}
-      <button type="submit">Borrar comentario</button>
-      <a href="{% url 'edit_comment' entry.comment_id %}">Editar comentario</a>
-    </form>
+  {% if edit_permission %}
+
+  <div class="">
+    <a href="{% url 'edit_comment' entry.comment_id %}">Editar comentario</a>
+
     <a href="{% url 'delete_comment' article.article_id entry.comment_id %}"
       >Eliminar</a
     >
-    {% endif %}
   </div>
+  {% endif %}
 </div>
 {% empty %}
 <p>No hay comentarios.</p>

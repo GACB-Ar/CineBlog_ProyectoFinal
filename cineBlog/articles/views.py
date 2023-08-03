@@ -96,14 +96,15 @@ def edit_article(request, id):
     return render(request, 'article_layouts/edit_article.html', context )
 
 @login_required
-def edit_comment(request, comment_id):
-    comment = get_object_or_404(Comments, comment_id=comment_id)
+def edit_comment(request, id):
+    comment = get_object_or_404(Comments, comment_id=id)
+    article = comment.related_article
 
     if request.method == 'POST':
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
             form.save()
-            return redirect('articulo', id=comment.related_article)
+            return redirect('article_detail', id=article.article_id)
     else:
         form = CommentForm(instance=comment)
 
@@ -111,7 +112,7 @@ def edit_comment(request, comment_id):
         'form': form,
         'comment': comment,
     }
-    return render(request, 'noticias/edit_comment.html', context)
+    return render(request, 'article_layouts/edit_comment.html', context)
 
 @login_required
 def create_article(request):
