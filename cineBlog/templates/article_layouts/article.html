@@ -1,56 +1,46 @@
 {% extends 'layouts/base.html' %} {% load static %} {% block content %}
-<h1>Articulos</h1>
+<h1 class="">Articulos</h1>
 <div class="row g-4">
-  {% if articles %}
-    <div class="col-12 my-4">
-      <div class="row gap-4">
-        <div class="col-12">
-          <label for="" class="form-label">Ordenar</label>
-          <div>
-            <button>
-              <a href="{% url 'articles' %}">Todo</a>
-            </button>
-          </div>
-          <div class="dropdown dropdown2">
-            <button class="dropbtn">Categorias</button >
-            <div class="dropdown-content">
-              {% for category in categories %}
-              <a href="?category_selection={{ category.id }}">{{ category.name }}</option>
-              {% endfor %}
-            </div>
-          </div>
-          <div class="dropdown dropdown2">
-            <button class="dropbtn">Fecha de creación</button >
-            <div class="dropdown-content">
-              <a href="?antiquity_desc=1">Más recientes primero ▲</option>
-              <a href="?antiquity_asc=1">Más antiguas primero ▼</option>
-            </div>
-          </div>
-          <div class="dropdown dropdown2">
-            <button class="dropbtn">Orden Alfabetico</button >
-            <div class="dropdown-content">
-              <a href="?alphabet_desc=1">Orden alfabético descedente ▲</option>
-              <a href="?alphabet_asc=1">Orden alfabético ascendente ▼</option>
-            </div>
-          </div>
+  <div class="col-12 my-4">
+    <div class="row gap-4">
+      <h3>Ordenar</h3>
+      <div class="col-12">
+        <div class="d-flex flex-wrap gap-2">
+          <a href="{% url 'articles' %}" class="button p-3">Todo</a>
+          {% for category in categories %}
+          <a href="?category_selection={{ category.id }}" class="button p-3"
+            >{{ category.name }}</a
+          >
+          {% endfor %}
+          <a href="?antiquity_desc=1" class="button p-3"
+            >Más recientes primero</a
+          >
+          <a href="?antiquity_asc=1" class="button p-3">Más antiguas primero</a>
+          <a href="?alphabet_desc=1" class="button p-3"
+            >Orden alfabético descendente</a
+          >
+          <a href="?alphabet_asc=1" class="button p-3"
+            >Orden alfabético ascendente</a
+          >
         </div>
       </div>
     </div>
-    {% for entry in articles %}
-    <div class="col-12 col-sm-12 col-md-6 col-lg-4">
-      <a href="{% url 'article_detail' entry.article_id %}" class="cart">
-        <div class="card h-100">
-          <img src="{{entry.image.url}}" alt="{{entry.title}}" />
-          <div class="card-body">
-            <h5 class="card-title">{{entry.title}}</h5>
-            <p class="card-text">{{entry.description}}</p>
-            <p class="card-text">
-              <strong> {{entry.article_creation_date}} </strong>
-            </p>
-          </div>
+  </div>
+  {% if articles %} {% for entry in articles %}
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+    <a href="{% url 'article_detail' entry.article_id %}" class="cart">
+      <div class="card h-100">
+        <img src="{{entry.image.url}}" alt="{{entry.title}}" />
+        <div class="card-body">
+          <h5 class="card-title">{{entry.title}}</h5>
+          <p class="card-text">{{entry.description}}</p>
+          <p class="card-text">
+            <strong> {{entry.article_creation_date}} </strong>
+          </p>
         </div>
-      </a>
-    </div>
+      </div>
+    </a>
+  </div>
   {% endfor %} {% else %}
   <div class="col-12">
     <p class="">No hay artículos.</p>

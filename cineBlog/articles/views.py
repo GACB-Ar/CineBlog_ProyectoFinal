@@ -104,8 +104,10 @@ def edit_comment(request, id):
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
             form.save()
+            messages.success(request, 'El comentario ha sido editado correctamente')
             return redirect('article_detail', id=article.article_id)
     else:
+        messages.error(request, 'Comentario inválido, intente otra vez')
         form = CommentForm(instance=comment)
 
     context = {

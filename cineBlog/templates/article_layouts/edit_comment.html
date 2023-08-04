@@ -1,7 +1,30 @@
 {% extends 'layouts/base.html' %} {% load static %} {% block content %}
-<form method="POST" action="{% url 'edit_comment' comment.comment_id %}">
-  {% csrf_token %} {{form.as_p}}
-
-  <button type="submit">Guardar cambios</button>
-</form>
+<div class="">
+  <h1 class="my-2">Editar comentario</h1>
+  <div class="card my-3">
+    <form
+      method="POST"
+      action="{% url 'edit_comment' comment.comment_id %}"
+      class="d-flex flex-column gap-3 p-4"
+    >
+      {% csrf_token %}
+      <div class="row gap-3">
+        <div class="col-12">
+          <label for="id_content" class="form-label">Contentario</label>
+          <textarea
+            name="content"
+            cols="40"
+            rows="10"
+            required=""
+            class="form-control"
+            id="id_content"
+          >
+{{comment}}</textarea
+          >
+        </div>
+      </div>
+      <button type="submit" class="py-3 mt-2">Guardar cambios</button>
+    </form>
+  </div>
+</div>
 {% endblock %}
