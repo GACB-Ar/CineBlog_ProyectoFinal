@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'cineBlog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cineblog',
+        'USER': 'VonGotz',
+        'PASSWORD': '@Gg644735890',
+        'HOST': '172.21.192.1',
+        'PORT': '3306',
     }
 }
 
