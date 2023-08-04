@@ -25,9 +25,9 @@ SECRET_KEY = 'django-insecure-c-30%^vix+!g^u5@0ox28kn5n_*g5b@nz-wu&-73*6o=61qeg%
 AUTH_USER_MODEL = 'users.User'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["gitguts.pythonanywhere.com"]
+ALLOWED_HOSTS = ["gitguts.pythonanywhere.com", "127.0.0.1"]
 
 # Application definition
 
@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'cineBlog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'GitGuts$default',
-        'USER': 'GitGuts',
-        'PASSWORD': 'Gg644735',
-        'HOST': 'GitGuts.mysql.pythonanywhere-services.com',
+        'NAME': 'cineblog',
+        'USER': 'VonGotz',
+        'PASSWORD': '@Gg644735890',
+        'HOST': '172.21.192.1',
         'PORT': '3306',
     }
 }
