@@ -5,7 +5,7 @@ class ContactForm(forms.Form):
     telefono = forms.CharField(max_length=20, required=False)
     email = forms.EmailField(required=True)
     asunto = forms.CharField(max_length=200, required=True)
-    mensaje = forms.Textarea()
+    mensaje = forms.CharField(widget=forms.Textarea, required=True)
 
     class Meta:
         fields = ['nombre', 'telefono', 'email', 'asunto', 'mensaje']
