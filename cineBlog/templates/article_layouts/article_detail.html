@@ -79,24 +79,45 @@
 <a href="{% url 'login' %}">Login</a>
 {% endif %} {% endif %} {% for entry in comment %}
 <div class="card my-5 gap-4">
-  <h3 class="bg-info p-3">{{ entry.comment_ownership }}</h3>
+  <h3 class="bg-info p-3 d-flex justify-content-between">
+    {{ entry.comment_ownership }} {% if edit_permission %}
+
+    <div class="d-flex gap-3">
+      <a
+        class="btn btn-primary"
+        href="{% url 'edit_comment' entry.comment_id %}"
+        >Editar</a
+      >
+
+      <a
+        id="deleteLink"
+        href="{% url 'delete_comment' article.article_id entry.comment_id %}"
+        class="btn btn-danger"
+        >Eliminar</a
+      >
+
+      <script>
+        const deleteLink = document.getElementById("deleteLink");
+
+        deleteLink.addEventListener("click", (event) => {
+          event.preventDefault(); // Evita que el enlace se active inmediatamente
+
+          if (
+            confirm("¿Estás seguro de que deseas eliminar este comentario?")
+          ) {
+            window.location.href = deleteLink.getAttribute("href");
+          }
+        });
+      </script>
+    </div>
+    {% endif %}
+  </h3>
 
   <div class="card-body">
     <p class="">{{ entry.content }}</p>
   </div>
 
   <p class="p-3 pb-0"><strong> {{ entry.comment_creation_date }} </strong></p>
-
-  {% if edit_permission %}
-
-  <div class="">
-    <a href="{% url 'edit_comment' entry.comment_id %}">Editar comentario</a>
-
-    <a href="{% url 'delete_comment' article.article_id entry.comment_id %}"
-      >Eliminar</a
-    >
-  </div>
-  {% endif %}
 </div>
 {% empty %}
 <p>No hay comentarios.</p>
