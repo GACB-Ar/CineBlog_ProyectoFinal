@@ -78,6 +78,7 @@
 <p>Debe iniciar sesión para añadir un comentario</p>
 <a href="{% url 'login' %}">Login</a>
 {% endif %} {% endif %} {% for entry in comment %}
+{% if article == comment.related_article %}
 <div class="card my-5 gap-4">
   <h3 class="bg-info p-3 d-flex justify-content-between">
     {{ entry.comment_ownership }} {% if edit_permission %}
@@ -119,6 +120,7 @@
 
   <p class="p-3 pb-0"><strong> {{ entry.comment_creation_date }} </strong></p>
 </div>
+{% endif %}
 {% empty %}
 <p>No hay comentarios.</p>
 {% endfor %} {% endblock content %}
